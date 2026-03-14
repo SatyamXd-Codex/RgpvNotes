@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RGPV Study Materials — RGPV Notes Portal</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Download RGPV Notes, Previous Year Question Papers, and Syllabus PDF files. Search by subject name or paper code." />
+  <meta name="keywords" content="RGPV Notes, RGPV PYQ, RGPV Syllabus, RGPV PDF Download, RGPV Semester Notes" />
+  <meta name="author" content="RGPV Notes Portal" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwOKw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="category">
+
+  <!-- Loading Screen -->
+  <div id="loading-screen" role="status" aria-label="Loading">
+    <div class="loader-logo">RGPV <span>Notes</span></div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo" aria-label="RGPV Notes Home">
+        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+        RGPV <span>Notes</span>
+      </a>
+      <div class="nav-links" role="navigation">
+        <a href="index.html">Home</a>
+        <a href="btech.html">B.Tech</a>
+        <a href="diploma.html">Diploma</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn-back" id="back-btn" aria-label="Go back">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Back
+        </button>
+        <button class="btn-icon theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+    <span class="sep" aria-hidden="true">/</span>
+    <a id="back-link" href="btech.html">
+      <span id="bread-course">B.Tech</span>
+    </a>
+    <span class="sep" aria-hidden="true">/</span>
+    <span id="bread-type" aria-current="page">Notes</span>
+  </nav>
+
+  <main>
+    <!-- Page Banner -->
+    <div class="page-banner">
+      <div class="page-banner-inner">
+        <div id="page-icon" aria-hidden="true" style="font-size:2rem;margin-bottom:0.5rem;color:var(--primary)">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <h1 id="page-title">B.Tech Notes</h1>
+        <p id="page-subtitle">Download notes for RGPV B.Tech</p>
+        <div class="page-banner-meta">
+          <span id="course-badge" class="badge badge-blue">B.Tech</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <!-- Semester Tabs (hidden for syllabus) -->
+      <div id="sem-section">
+        <div class="section-header" style="text-align:left;margin-bottom:1rem">
+          <span class="section-label">Select Semester</span>
+        </div>
+        <div class="semester-grid" id="sem-grid" role="list" aria-label="Semester selector">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="search-wrap mt-3">
+        <label for="search-input" class="sr-only">Search files</label>
+        <div class="search-box" role="search">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Search by subject name, paper code…"
+            autocomplete="off"
+            aria-label="Search files"
+          />
+          <button id="search-clear" class="btn-search-clear" aria-label="Clear search">Clear</button>
+        </div>
+      </div>
+
+      <!-- Results Info -->
+      <div class="results-info" role="status" aria-live="polite">
+        <span class="results-count">
+          <span id="results-count">Loading…</span>
+        </span>
+      </div>
+
+      <!-- PDF Grid -->
+      <div class="pdf-grid" id="pdf-grid" role="list" aria-label="PDF files">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+          RGPV <span>Notes</span>
+        </div>
+        <p>A free resource portal for RGPV students providing notes, question papers, and syllabus for all semesters.</p>
+      </div>
+      <div class="footer-col">
+        <h5>B.Tech</h5>
+        <ul>
+          <li><a href="category.html?course=btech&amp;type=notes">Notes</a></li>
+          <li><a href="category.html?course=btech&amp;type=pyq">Previous Year Papers</a></li>
+          <li><a href="category.html?course=btech&amp;type=syllabus">Syllabus</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Diploma</h5>
+        <ul>
+          <li><a href="category.html?course=diploma&amp;type=notes">Notes</a></li>
+          <li><a href="category.html?course=diploma&amp;type=pyq">Previous Year Papers</a></li>
+          <li><a href="category.html?course=diploma&amp;type=syllabus">Syllabus</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 RGPV Notes Portal. Made with <i class="fas fa-heart" style="color:#e53e3e" aria-hidden="true"></i> for students.</p>
+      <p>Not affiliated with <abbr title="Rajiv Gandhi Proudyogiki Vishwavidyalaya">RGPV</abbr> officially.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
