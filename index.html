@@ -5,207 +5,131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RGPV Notes Portal — Free BTech &amp; Diploma Notes, PYQ, Syllabus</title>
 
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Download free RGPV BTech and Diploma Notes, Previous Year Question Papers (PYQ), and Syllabus in PDF format. All semesters covered." />
-  <meta name="keywords" content="RGPV Notes, RGPV BTech Notes, RGPV Diploma Notes, RGPV Previous Year Papers, RGPV Syllabus, RGPV PYQ, Rajiv Gandhi Proudyogiki Vishwavidyalaya" />
-  <meta name="author" content="RGPV Notes Portal" />
-  <meta name="robots" content="index, follow" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="RGPV Notes Portal" />
-  <meta property="og:description" content="Free RGPV BTech and Diploma Notes, PYQ, and Syllabus PDF downloads." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://satyamxd-codex.github.io/RgpvNotes/" />
-
-  <!-- Canonical -->
-  <link rel="canonical" href="https://satyamxd-codex.github.io/RgpvNotes/" />
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwOKw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- Stylesheet -->
+  <meta name="description" content="Download free RGPV BTech and Diploma Notes, PYQ, and Syllabus in PDF." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body data-page="index">
 
-  <!-- Loading Screen -->
-  <div id="loading-screen" role="status" aria-label="Loading">
+  <div class="announcement-bar">
+    <p><i class="fas fa-bullhorn"></i> New: Dec 2025 PYQs for Diploma CS are now live! <a href="#prog-heading">Check Now</a></p>
+  </div>
+
+  <div id="loading-screen" role="status">
     <div class="loader-logo">RGPV <span>Notes</span></div>
     <div class="loader-bar"><div class="loader-progress"></div></div>
   </div>
 
-  <!-- Header -->
-  <header class="header" role="banner">
-    <nav class="nav" aria-label="Main navigation">
-      <a href="index.html" class="nav-logo" aria-label="RGPV Notes Home">
-        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-        RGPV <span>Notes</span>
+  <header class="header">
+    <nav class="nav">
+      <a href="index.html" class="nav-logo">
+        <i class="fas fa-graduation-cap"></i> RGPV <span>Notes</span>
       </a>
-      <div class="nav-links" role="navigation">
+      <div class="nav-links">
         <a href="index.html" class="active">Home</a>
         <a href="btech.html">B.Tech</a>
         <a href="diploma.html">Diploma</a>
+        <a href="#about">About</a>
       </div>
       <div class="nav-actions">
-        <button class="btn-icon theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
-          <i class="fas fa-moon" aria-hidden="true"></i>
-        </button>
+        <button class="btn-icon theme-toggle"><i class="fas fa-moon"></i></button>
       </div>
     </nav>
   </header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero" aria-labelledby="hero-heading">
+    <section class="hero">
       <div class="hero-content">
-        <div class="hero-badge">
-          <i class="fas fa-star" aria-hidden="true"></i>
-          Free for All Students
+        <div class="hero-badge"><i class="fas fa-check-circle"></i> Verified Educational Content</div>
+        <h1>Simplify Your <span>RGPV</span> Exams</h1>
+        <p>Expertly curated notes, previous year papers, and latest syllabus for B.Tech and Diploma students. No login required.</p>
+        
+        <div class="hero-cta">
+          <a href="#prog-heading" class="btn btn-primary">Start Learning <i class="fas fa-arrow-right"></i></a>
         </div>
-        <h1 id="hero-heading">RGPV Notes <span>Portal</span></h1>
-        <p>Download Notes, Previous Year Question Papers, and Syllabus for RGPV BTech &amp; Diploma — all semesters, all in one place, completely free.</p>
 
-        <div class="hero-stats" role="list" aria-label="Portal statistics">
-          <div class="stat-item" role="listitem">
-            <span class="num">8+</span>
-            <span class="lbl">Semesters</span>
-          </div>
-          <div class="stat-item" role="listitem">
-            <span class="num">3</span>
-            <span class="lbl">Categories</span>
-          </div>
-          <div class="stat-item" role="listitem">
-            <span class="num">Free</span>
-            <span class="lbl">Downloads</span>
-          </div>
+        <div class="hero-stats">
+          <div class="stat-item"><span class="num">500+</span><span class="lbl">PDF Files</span></div>
+          <div class="stat-item"><span class="num">10k+</span><span class="lbl">Students</span></div>
+          <div class="stat-item"><span class="num">100%</span><span class="lbl">Free</span></div>
         </div>
       </div>
     </section>
 
-    <!-- Choose Programme -->
-    <section class="section" aria-labelledby="prog-heading">
+    <section class="section" id="prog-heading">
       <div class="section-header">
-        <span class="section-label">Get Started</span>
-        <h2 id="prog-heading">Choose Your Programme</h2>
-        <p>Select your course to browse notes, question papers, and syllabus</p>
+        <span class="section-label">Quick Access</span>
+        <h2>Choose Your Department</h2>
       </div>
 
       <div class="primary-cards">
-        <!-- BTech Card -->
-        <a href="btech.html" class="primary-card btech" id="card-btech" aria-label="Browse B.Tech resources">
-          <div class="card-bg-pattern"></div>
+        <a href="btech.html" class="primary-card btech">
           <div class="card-inner">
-            <div class="card-icon-wrap" aria-hidden="true">
-              <i class="fas fa-laptop-code"></i>
-            </div>
-            <h3>B.Tech</h3>
-            <p>Bachelor of Technology — 8 semesters of notes, PYQ &amp; syllabus</p>
-            <span class="card-arrow">
-              Explore <i class="fas fa-arrow-right" aria-hidden="true"></i>
-            </span>
+            <div class="card-icon-wrap"><i class="fas fa-university"></i></div>
+            <h3>Engineering (B.Tech)</h3>
+            <p>Access notes for CSE, ME, CE, EX and more.</p>
+            <span class="card-arrow">View All Semesters <i class="fas fa-chevron-right"></i></span>
           </div>
         </a>
 
-        <!-- Diploma Card -->
-        <a href="diploma.html" class="primary-card diploma" id="card-diploma" aria-label="Browse Diploma resources">
-          <div class="card-bg-pattern"></div>
+        <a href="diploma.html" class="primary-card diploma">
           <div class="card-inner">
-            <div class="card-icon-wrap" aria-hidden="true">
-              <i class="fas fa-tools"></i>
-            </div>
-            <h3>Diploma</h3>
-            <p>Polytechnic Diploma — 6 semesters of notes, PYQ &amp; syllabus</p>
-            <span class="card-arrow">
-              Explore <i class="fas fa-arrow-right" aria-hidden="true"></i>
-            </span>
+            <div class="card-icon-wrap"><i class="fas fa-scroll"></i></div>
+            <h3>Polytechnic Diploma</h3>
+            <p>Full syllabus & notes for all diploma branches.</p>
+            <span class="card-arrow">View All Semesters <i class="fas fa-chevron-right"></i></span>
           </div>
         </a>
       </div>
     </section>
 
-    <!-- Features -->
-    <section class="section" aria-labelledby="features-heading" style="padding-top:0">
-      <div class="section-header">
-        <span class="section-label">Why Use Us</span>
-        <h2 id="features-heading">Everything You Need</h2>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-file-pdf" aria-hidden="true"></i></div>
-          <h4>PDF Notes</h4>
-          <p>Comprehensive subject-wise notes for all semesters in clean PDF format.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-history" aria-hidden="true"></i></div>
-          <h4>Previous Year Papers</h4>
-          <p>Practice with real exam papers from past years to boost your preparation.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-list-alt" aria-hidden="true"></i></div>
-          <h4>Latest Syllabus</h4>
-          <p>Stay on track with the current RGPV syllabus for each programme.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-search" aria-hidden="true"></i></div>
-          <h4>Instant Search</h4>
-          <p>Find any file by subject name, paper code, or keyword in seconds.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-mobile-alt" aria-hidden="true"></i></div>
-          <h4>Mobile Friendly</h4>
-          <p>Fully responsive design — study from any device, anywhere.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-download" aria-hidden="true"></i></div>
-          <h4>Free Downloads</h4>
-          <p>All resources are 100% free — no login, no subscriptions required.</p>
+    <section class="section newsletter-section">
+      <div class="newsletter-card">
+        <h3>Missing any Notes?</h3>
+        <p>If you can't find a specific subject, let us know and we'll upload it!</p>
+        <div class="search-box" style="max-width: 400px; margin: 1.5rem auto 0;">
+            <input type="text" placeholder="Tell us the subject name..." />
+            <button class="btn btn-primary" style="border-radius: 50px;">Request</button>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer" role="contentinfo">
+  <footer class="footer">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="nav-logo">
-          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-          RGPV <span>Notes</span>
+        <div class="nav-logo">RGPV <span>Notes</span></div>
+        <p>A student-led initiative to provide free quality resources to Rajiv Gandhi Proudyogiki Vishwavidyalaya students.</p>
+        <div class="footer-socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
         </div>
-        <p>A free resource portal for RGPV students providing notes, question papers, and syllabus for all semesters.</p>
       </div>
       <div class="footer-col">
-        <h5>B.Tech</h5>
+        <h5>Resources</h5>
         <ul>
-          <li><a href="category.html?course=btech&amp;type=notes">Notes</a></li>
-          <li><a href="category.html?course=btech&amp;type=pyq">Previous Year Papers</a></li>
-          <li><a href="category.html?course=btech&amp;type=syllabus">Syllabus</a></li>
+          <li><a href="btech.html">B.Tech Portal</a></li>
+          <li><a href="diploma.html">Diploma Portal</a></li>
+          <li><a href="#">Syllabus 2026</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Diploma</h5>
+        <h5>Quick Links</h5>
         <ul>
-          <li><a href="category.html?course=diploma&amp;type=notes">Notes</a></li>
-          <li><a href="category.html?course=diploma&amp;type=pyq">Previous Year Papers</a></li>
-          <li><a href="category.html?course=diploma&amp;type=syllabus">Syllabus</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">RGPV Official</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2024 RGPV Notes Portal. Made with <i class="fas fa-heart" style="color:#e53e3e" aria-hidden="true"></i> for students.</p>
-      <p>Not affiliated with <abbr title="Rajiv Gandhi Proudyogiki Vishwavidyalaya">RGPV</abbr> officially.</p>
+      <p>&copy; 2026 RGPV Notes Portal. Not an official RGPV website.</p>
     </div>
   </footer>
 
-  <!-- Scroll to Top -->
-  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
-    <i class="fas fa-arrow-up" aria-hidden="true"></i>
-  </button>
+  <button class="scroll-top" id="scroll-top"><i class="fas fa-arrow-up"></i></button>
 
   <script src="script.js"></script>
 </body>
