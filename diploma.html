@@ -19,7 +19,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwOKw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -42,7 +42,7 @@
         <i class="fas fa-graduation-cap" aria-hidden="true"></i>
         RGPV <span>Notes</span>
       </a>
-      <div class="nav-links" role="navigation">
+      <div class="nav-links" id="nav-menu" role="navigation">
         <a href="index.html">Home</a>
         <a href="btech.html">B.Tech</a>
         <a href="diploma.html" class="active">Diploma</a>
@@ -53,6 +53,9 @@
         </button>
         <button class="btn-icon theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
           <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">
+          <span></span><span></span><span></span>
         </button>
       </div>
     </nav>

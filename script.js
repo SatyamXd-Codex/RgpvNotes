@@ -569,7 +569,7 @@ function initScrollAnimations() {
 }
 
 /* ====================================================
-   14. MOBILE NAV TOGGLE (hamburger — reserved)
+   14. MOBILE NAV TOGGLE (hamburger)
    ==================================================== */
 function initMobileNav() {
   const toggle = document.getElementById('nav-toggle');
@@ -579,6 +579,13 @@ function initMobileNav() {
     const expanded = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!expanded));
     menu.classList.toggle('open', !expanded);
+  });
+  // Close menu when a link is clicked
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('open');
+    });
   });
 }
 
