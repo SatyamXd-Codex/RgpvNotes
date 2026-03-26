@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | RGPV Notes</title>
+  <meta name="description" content="Learn more about RGPV Notes - a student-focused platform for RGPV BTech and Diploma notes, previous year papers, and syllabus PDFs." />
+  <meta name="keywords" content="About RGPV Notes, RGPV Notes Portal, RGPV BTech Notes, RGPV Diploma Notes, Previous Year Papers, Syllabus" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f8fbff, #eef5ff);
+      color: #111827;
+    }
+
+    .about-container {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+
+    .about-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+      animation: fadeUp 0.8s ease;
+    }
+
+    .about-badge {
+      display: inline-block;
+      background: #e0ecff;
+      color: #2563eb;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+
+    .about-title {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .about-subtitle {
+      font-size: 18px;
+      color: #475569;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 22px;
+      margin-top: 35px;
+    }
+
+    .about-box {
+      background: linear-gradient(135deg, #f8fbff, #eef4ff);
+      border: 1px solid #dbeafe;
+      border-radius: 20px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .about-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.12);
+    }
+
+    .about-box h3 {
+      margin-top: 0;
+      font-size: 20px;
+      color: #1d4ed8;
+      margin-bottom: 12px;
+    }
+
+    .about-box p {
+      font-size: 15px;
+      color: #475569;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .highlight-section {
+      margin-top: 45px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      border-radius: 24px;
+      padding: 35px;
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.25);
+    }
+
+    .highlight-section h2 {
+      margin-top: 0;
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .highlight-section p {
+      font-size: 16px;
+      line-height: 1.9;
+      opacity: 0.95;
+    }
+
+    .about-buttons {
+      margin-top: 35px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .about-btn {
+      text-decoration: none;
+      padding: 14px 24px;
+      border-radius: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .primary-btn {
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-3px);
+      background: #1d4ed8;
+    }
+
+    .secondary-btn {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .secondary-btn:hover {
+      transform: translateY(-3px);
+      background: #dbeafe;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .about-title {
+        font-size: 32px;
+      }
+
+      .about-card {
+        padding: 28px 20px;
+      }
+
+      .highlight-section {
+        padding: 25px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="about-container">
+    <div class="about-card">
+      <span class="about-badge">About RGPV Notes</span>
+
+      <h1 class="about-title">A Student-Friendly Platform for RGPV BTech & Diploma Learners</h1>
+
+      <p class="about-subtitle">
+        <strong>RGPV Notes</strong> is built to help students easily access important academic resources like 
+        <strong>Notes</strong>, <strong>Previous Year Question Papers (PYQ)</strong>, and 
+        <strong>Syllabus PDFs</strong> for both <strong>RGPV BTech</strong> and <strong>RGPV Diploma</strong>.
+        Our goal is to make study material easy to find, fast to open, and simple to use on any device.
+      </p>
+
+      <div class="about-grid">
+        <div class="about-box">
+          <h3>📘 Notes</h3>
+          <p>Semester-wise and branch-wise notes to help students prepare better with organized study material.</p>
+        </div>
+
+        <div class="about-box">
+          <h3>📄 PYQ Papers</h3>
+          <p>Previous year papers with semester structure so students can practice important exam patterns.</p>
+        </div>
+
+        <div class="about-box">
+          <h3>📚 Syllabus</h3>
+          <p>Updated syllabus PDFs for quick reference and clear understanding of what to study.</p>
+        </div>
+
+        <div class="about-box">
+          <h3>⚡ Easy Access</h3>
+          <p>Designed for students who want fast, mobile-friendly, and distraction-free access to useful resources.</p>
+        </div>
+      </div>
+
+      <div class="highlight-section">
+        <h2>Why This Platform Was Created</h2>
+        <p>
+          Many students struggle to find proper notes, syllabus files, and exam papers in one place. 
+          This website was created to solve that problem by offering a clean and professional platform where 
+          everything can be accessed semester-wise and category-wise without confusion.
+        </p>
+      </div>
+
+      <div class="about-buttons">
+        <a href="index.html" class="about-btn primary-btn">⬅ Back to Home</a>
+        <a href="category.html" class="about-btn secondary-btn">Explore Resources</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
