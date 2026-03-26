@@ -202,11 +202,14 @@ const PDFLoader = (() => {
    *   - plain filename: "Applied_Maths_PYQ.pdf"
    *   - object: { name, url } — where url overrides default path
    */
-  function fileUrl(path, file) {
-    if (typeof file === 'object' && file.url) return file.url;
-    const name = typeof file === 'string' ? file : file.name;
-    return `data/${path}/${name}`;
-  }
+function fileUrl(path, file) {
+  if (typeof file === 'object' && file.url) return file.url;
+
+  const name = typeof file === 'string' ? file : file.name;
+
+  // Encode safely but keep slashes intact
+  return `data/${path}/${encodeURIComponent(name)}`;
+}
 
   function fileName(file) {
     if (typeof file === 'string') return file;
