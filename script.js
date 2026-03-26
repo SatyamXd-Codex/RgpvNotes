@@ -129,87 +129,66 @@ const Nav = (() => {
 })();
 
 /* ====================================================
-   6. PDF MANIFEST — inline data (GitHub Pages compatible)
-   ==================================================== */
-/**
- * Since GitHub Pages serves static files and there is no server-side
- * directory listing, PDFs are tracked via a manifest.
- * When new PDFs are added to a folder, update the manifest below
- * OR upload pdfs with a matching manifest.json in each folder.
- *
- * The PDFLoader first tries to fetch manifest.json from the folder,
- * then falls back to the INLINE_MANIFEST below.
- */
-const INLINE_MANIFEST = {
-  'btech/notes/sem1': [],
-  'btech/notes/sem2': [],
-  'btech/notes/sem3': [],
-  'btech/notes/sem4': [],
-  'btech/notes/sem5': [],
-  'btech/notes/sem6': [],
-  'btech/notes/sem7': [],
-  'btech/notes/sem8': [],
-  'btech/pyq/sem1':   [],
-  'btech/pyq/sem2':   [],
-  'btech/pyq/sem3':   [],
-  'btech/pyq/sem4':   [],
-  'btech/pyq/sem5':   [],
-  'btech/pyq/sem6':   [],
-  'btech/pyq/sem7':   [],
-  'btech/pyq/sem8':   [],
-  'btech/syllabus':   [],
-  'diploma/notes/sem1': [],
-  'diploma/notes/sem2': [],
-  'diploma/notes/sem3': [],
-  'diploma/notes/sem4': [],
-  'diploma/notes/sem5': [],
-  'diploma/notes/sem6': [],
-  'diploma/pyq/sem1':   [],
-  'diploma/pyq/sem2':   [],
-  'diploma/pyq/sem3':   [],
-  'diploma/pyq/sem4':   [],
-  'diploma/pyq/sem5':   [],
-  'diploma/pyq/sem6':   [],
-  'diploma/syllabus':   [],
-};
-
-/* ====================================================
-   7. PDF LOADER
+   6. GITHUB PDF LOADER (NO MANIFEST NEEDED)
    ==================================================== */
 const PDFLoader = (() => {
-  /**
-   * Load PDFs for a given path, e.g. 'btech/notes/sem1'
-   * First attempts to fetch /data/<path>/manifest.json,
-   * falls back to INLINE_MANIFEST.
-   */
+  const GITHUB_USER = 'SatyamXd-Codex';
+  const GITHUB_REPO = 'RgpvNotes';
+  const GITHUB_BRANCH = 'main';
+
+  // Optional cache to reduce GitHub API calls
+  const cache = new Map();
+
   async function load(path) {
-    const manifestUrl = `data/${path}/manifest.json`;
-    try {
-      const res = await fetch(manifestUrl);
-      if (res.ok) {
-        const json = await res.json();
-        return Array.isArray(json) ? json : [];
-      }
-    } catch (_) {
-      // ignore — fall through to inline manifest
+    // path example: diploma/pyq/sem1
+    const repoPath = `data/${path}`;
+    const cacheKey = repoPath;
+
+    if (cache.has(cacheKey)) {
+      return cache.get(cacheKey);
     }
-    return INLINE_MANIFEST[path] || [];
+
+    const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${repoPath}?ref=${GITHUB_BRANCH}`;
+
+    try {
+      const res = await fetch(apiUrl, {
+        headers: {
+          'Accept': 'application/vnd.github+json'
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error(`GitHub API failed: ${res.status}`);
+      }
+
+      const items = await res.json();
+
+      if (!Array.isArray(items)) {
+        cache.set(cacheKey, []);
+        return [];
+      }
+
+      const files = items
+        .filter(item => item.type === 'file' && item.name.toLowerCase().endsWith('.pdf'))
+        .map(item => ({
+          name: item.name,
+          url: item.download_url
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+
+      cache.set(cacheKey, files);
+      return files;
+    } catch (error) {
+      console.error('PDF load error:', error);
+      return [];
+    }
   }
 
-  /**
-   * Build full URL for a PDF file.
-   * files can be:
-   *   - plain filename: "Applied_Maths_PYQ.pdf"
-   *   - object: { name, url } — where url overrides default path
-   */
-function fileUrl(path, file) {
-  if (typeof file === 'object' && file.url) return file.url;
-
-  const name = typeof file === 'string' ? file : file.name;
-
-  // Encode safely but keep slashes intact
-  return `data/${path}/${encodeURIComponent(name)}`;
-}
+  function fileUrl(path, file) {
+    if (typeof file === 'object' && file.url) return file.url;
+    const name = typeof file === 'string' ? file : file.name;
+    return `data/${path}/${encodeURIComponent(name)}`;
+  }
 
   function fileName(file) {
     if (typeof file === 'string') return file;
@@ -220,16 +199,46 @@ function fileUrl(path, file) {
 })();
 
 /* ====================================================
+   7. FILE NAME BEAUTIFIER
+   ==================================================== */
+function beautifyFileName(rawName) {
+  let name = rawName.replace(/\.pdf$/i, '');
+
+  // Replace separators with spaces
+  name = name.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
+
+  // Subject beautification
+  name = name
+    .replace(/\bphysics\s*1\b/i, 'Engineering Physics-I')
+    .replace(/\bmath\s*1\b/i, 'Mathematics-I')
+    .replace(/\bmathematics\s*1\b/i, 'Mathematics-I')
+    .replace(/\bmath\b/i, 'Mathematics-I')
+    .replace(/\bchemistry\b/i, 'Engineering Chemistry')
+    .replace(/\benglishcommunication\b/i, 'English Communication')
+    .replace(/\benglish communication\b/i, 'English Communication');
+
+  // S / BK / F tags
+  name = name
+    .replace(/\b2025s\b/i, '2025 (Supplementary)')
+    .replace(/\b2024s\b/i, '2024 (Supplementary)')
+    .replace(/\b2025bk\b/i, '2025 (Back)')
+    .replace(/\b2025f\b/i, '2025 (Final)');
+
+  // Clean duplicate spaces again
+  name = name.replace(/\s+/g, ' ').trim();
+
+  return name;
+}
+
+/* ====================================================
    8. PDF CARDS RENDERER
    ==================================================== */
 const PDFGrid = (() => {
   function createCard(file, path, index) {
-     const url = PDFLoader.fileUrl(path, file);
-     const rawName = PDFLoader.fileName(file);
-     const displayName =
-    (typeof file === 'object' && file.title)
-    ? file.title
-    : rawName.replace(/\.pdf$/i, '').replace(/[_-]+/g, ' ');
+    const url = PDFLoader.fileUrl(path, file);
+    const rawName = PDFLoader.fileName(file);
+    const displayName = beautifyFileName(rawName);
+
     const card = document.createElement('article');
     card.className = 'pdf-card';
     card.style.animationDelay = `${index * 0.05}s`;
@@ -279,8 +288,8 @@ const PDFGrid = (() => {
     if (!files.length) {
       renderEmpty(
         gridEl,
-        'No files uploaded yet.',
-        'PDF files will appear here once they are added to the repository.'
+        'No PDF files found in this folder.',
+        'Upload PDF files to the matching GitHub folder and they will appear automatically.'
       );
       if (countEl) countEl.textContent = '0 files';
       return files;
@@ -318,7 +327,6 @@ const Search = (() => {
         if (show) visible++;
       });
 
-      // Remove old empty state if exists
       const old = gridEl.querySelector('.empty-state');
       if (old) old.remove();
 
@@ -419,7 +427,6 @@ async function initCategoryPage() {
   const type   = Nav.param('type')   || 'notes';
   const sem    = Nav.param('sem')    || '';
 
-  // Update breadcrumbs / titles
   updateCategoryUI(course, type);
 
   const isSyllabus = type === 'syllabus';
@@ -440,7 +447,6 @@ async function initCategoryPage() {
     return;
   }
 
-  // Semester-based navigation
   buildSemesterTabs(course, type, sem);
 
   const activeSem = sem || getDefaultSem(course);
@@ -482,11 +488,9 @@ function buildSemesterTabs(course, type, activeSem) {
 }
 
 async function switchSemester(course, type, sem) {
-  // Update URL without reload
   const newUrl = Nav.buildUrl('category.html', { course, type, sem });
   window.history.replaceState({}, '', newUrl);
 
-  // Update active tab
   document.querySelectorAll('.sem-card').forEach(c => {
     c.classList.toggle('active', c.dataset.sem === sem);
   });
@@ -498,7 +502,6 @@ async function switchSemester(course, type, sem) {
 
   if (!pdfGrid) return;
 
-  // Clear search
   if (searchIn) searchIn.value = '';
 
   const path = `${course}/${type}/${sem}`;
@@ -533,7 +536,6 @@ function updateCategoryUI(course, type) {
     badgeEl.className = `badge ${course === 'btech' ? 'badge-blue' : 'badge-orange'}`;
   }
 
-  // Back link
   const backLink = document.getElementById('back-link');
   if (backLink) {
     backLink.href = course === 'btech' ? 'btech.html' : 'diploma.html';
@@ -557,7 +559,7 @@ function initBackButton() {
 }
 
 /* ====================================================
-   13. ANIMATE ON SCROLL (simple IntersectionObserver)
+   13. ANIMATE ON SCROLL
    ==================================================== */
 function initScrollAnimations() {
   if (!('IntersectionObserver' in window)) return;
@@ -574,7 +576,7 @@ function initScrollAnimations() {
 }
 
 /* ====================================================
-   14. MOBILE NAV TOGGLE (hamburger)
+   14. MOBILE NAV TOGGLE
    ==================================================== */
 function initMobileNav() {
   const toggle = document.getElementById('nav-toggle');
@@ -585,7 +587,6 @@ function initMobileNav() {
     toggle.setAttribute('aria-expanded', String(!expanded));
     menu.classList.toggle('open', !expanded);
   });
-  // Close menu when a link is clicked
   menu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       toggle.setAttribute('aria-expanded', 'false');
@@ -598,7 +599,6 @@ function initMobileNav() {
    15. MAIN ENTRY
    ==================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-  // Universal inits
   ThemeManager.init();
   initLoadingScreen();
   initHeader();
@@ -607,13 +607,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initMobileNav();
 
-  // Page-specific
   const page = document.body.dataset.page;
   if (page === 'index')    initIndexPage();
   if (page === 'course')   initCoursePage();
   if (page === 'category') initCategoryPage();
 
-  // Add page-transition class to main
   const main = document.querySelector('main');
   if (main) main.classList.add('page-transition');
 });
