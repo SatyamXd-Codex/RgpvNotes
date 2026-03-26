@@ -221,10 +221,12 @@ const PDFLoader = (() => {
    ==================================================== */
 const PDFGrid = (() => {
   function createCard(file, path, index) {
-    const url = PDFLoader.fileUrl(path, file);
-    const rawName = PDFLoader.fileName(file);
-    const displayName = rawName.replace(/\.pdf$/i, '').replace(/[_-]+/g, ' ');
-
+     const url = PDFLoader.fileUrl(path, file);
+     const rawName = PDFLoader.fileName(file);
+     const displayName =
+    (typeof file === 'object' && file.title)
+    ? file.title
+    : rawName.replace(/\.pdf$/i, '').replace(/[_-]+/g, ' ');
     const card = document.createElement('article');
     card.className = 'pdf-card';
     card.style.animationDelay = `${index * 0.05}s`;
