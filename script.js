@@ -223,6 +223,10 @@ function beautifyFileName(rawName) {
     .replace(/\b2024s\b/i, '2024 (Supplementary)')
     .replace(/\b2025bk\b/i, '2025 (Back)')
     .replace(/\b2025f\b/i, '2025 (Final)');
+      .replace(/\b2024F\b/i, '2024 (Final)')
+    .replace(/\b2025\b/i, '2025 (Final)')
+    .replace(/\b2026F\b/i, '2026 (Final)')
+    .replace(/\b2024\b/i, '2024 (First)');
 
   // Clean duplicate spaces again
   name = name.replace(/\s+/g, ' ').trim();
