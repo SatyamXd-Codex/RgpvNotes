@@ -160,5 +160,63 @@
   </button>
 
   <script src="script.js"></script>
+
+  <script>
+/* ===============================
+   CLEAN URL SYSTEM (NO SEO CHANGE)
+================================= */
+
+// Handle clean URL → query system
+(function () {
+  const path = window.location.pathname;
+  const parts = path.split("/").filter(Boolean);
+
+  // Example: /diploma/sem4/notes/
+  if (parts.length >= 3) {
+    const course = parts[0];
+    const sem = parts[1];
+    const type = parts[2];
+
+    const newUrl = `category.html?course=${course}&type=${type}&sem=${sem}`;
+
+    // Replace URL internally (no reload)
+    history.replaceState({}, "", newUrl);
+  }
+})();
+
+
+// Convert old links → clean URL
+document.addEventListener("DOMContentLoaded", function () {
+
+  document.querySelectorAll("a[href*='category.html']").forEach(link => {
+    link.addEventListener("click", function (e) {
+
+      const url = new URL(this.href);
+
+      const course = url.searchParams.get("course");
+      const type = url.searchParams.get("type");
+      const sem = url.searchParams.get("sem");
+
+      if (course && type) {
+        e.preventDefault();
+
+        let cleanUrl = "/" + course + "/";
+
+        if (sem) {
+          cleanUrl += sem + "/";
+        }
+
+        cleanUrl += type + "/";
+
+        // Redirect to clean URL
+        window.location.href = cleanUrl;
+      }
+
+    });
+  });
+
+});
+  </script>
+  
 </body>
 </html>
