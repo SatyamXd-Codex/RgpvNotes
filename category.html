@@ -22,6 +22,20 @@
 </head>
 <body data-page="category">
 
+<script>
+const params = new URLSearchParams(window.location.search);
+const path = params.get("path");
+
+if (path) {
+  const parts = path.split("/").filter(Boolean);
+
+  if (parts.length >= 3) {
+    const newUrl = `?course=${parts[0]}&type=${parts[2]}&sem=${parts[1]}`;
+    history.replaceState({}, "", newUrl);
+  }
+}
+</script>
+
   <!-- Loading Screen -->
   <div id="loading-screen" role="status" aria-label="Loading">
     <div class="loader-logo">RGPV <span>Notes</span></div>
