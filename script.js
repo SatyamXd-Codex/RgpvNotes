@@ -125,6 +125,35 @@ const Nav = (() => {
   return { param, buildUrl };
 })();
 
+// ===== ROUTE HANDLER =====
+function getRoute() {
+  const params = new URLSearchParams(window.location.search);
+
+  let course = params.get("course");
+  let type = params.get("type");
+  let sem = params.get("sem");
+
+  // Agar params nahi mile → path se lo
+  if (!course || !type || !sem) {
+    const path = window.location.pathname.split("/").filter(Boolean);
+
+    if (path.length >= 3) {
+      course = path[0];
+      type = path[1];
+      sem = path[2].replace("sem-", "");
+    }
+  }
+
+  return { course, type, sem };
+}
+
+// ===== CLEAN URL SHOW =====
+function updateCleanURL(course, type, sem) {
+  if (course && type && sem) {
+    const cleanUrl = `/${course}/${type}/sem-${sem}`;
+    window.history.replaceState({}, "", cleanUrl);
+  }
+}
 /* ====================================================
    6. GITHUB PDF LOADER (NO MANIFEST NEEDED)
    ==================================================== */
