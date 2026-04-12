@@ -111,10 +111,28 @@ function initLoadingScreen() {
 /* ====================================================
    5. NAVIGATION STATE (URL params)
    ==================================================== */
-const Nav = (() => {
-  function getParams() {
+function getParams() {
+
+  // अगर query params हैं तो वही use करो
+  if (window.location.search) {
     return new URLSearchParams(window.location.search);
   }
+
+  // वरना clean URL से params बनाओ
+  const path = window.location.pathname;
+  const parts = path.split("/").filter(Boolean);
+
+  const params = new URLSearchParams();
+
+  // Example: /diploma/sem4/notes/
+  if (parts.length >= 3) {
+    params.set("course", parts[0]);
+    params.set("sem", parts[1]);
+    params.set("type", parts[2]);
+  }
+
+  return params;
+}
 
   function param(key) {
     return getParams().get(key) || '';
