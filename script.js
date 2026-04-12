@@ -108,31 +108,10 @@ function initLoadingScreen() {
   });
 }
 
-/* ====================================================
-   5. NAVIGATION STATE (URL params)
-   ==================================================== */
 function getParams() {
-
-  // अगर query params हैं (old system)
-  if (window.location.search) {
     return new URLSearchParams(window.location.search);
-  }
-
-  // clean URL support
-  const path = window.location.pathname;
-  const parts = path.split("/").filter(Boolean);
-
-  const params = new URLSearchParams();
-
-  // Example: /diploma/sem4/notes/
-  if (parts.length >= 3) {
-    params.set("course", parts[0]);
-    params.set("sem", parts[1]);
-    params.set("type", parts[2]);
-  }
-
-  return params;
 }
+
 function param(key) {
     return getParams().get(key) || '';
   }
