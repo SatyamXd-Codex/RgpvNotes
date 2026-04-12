@@ -108,11 +108,12 @@ function initLoadingScreen() {
   });
 }
 
-function getParams() {
+const Nav = (() => {
+  function getParams() {
     return new URLSearchParams(window.location.search);
-}
+  }
 
-function param(key) {
+  function param(key) {
     return getParams().get(key) || '';
   }
 
