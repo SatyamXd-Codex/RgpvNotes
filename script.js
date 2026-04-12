@@ -454,9 +454,10 @@ function detectCourseFromPage() {
 
 /** category.html — PDF listing **/
 async function initCategoryPage() {
-  const course = Nav.param('course') || 'btech';
-  const type   = Nav.param('type')   || 'notes';
-  const sem    = Nav.param('sem')    || '';
+const { course, type, sem } = getRoute();
+
+// Clean URL show karo
+updateCleanURL(course, type, sem);
 
   updateCategoryUI(course, type);
 
