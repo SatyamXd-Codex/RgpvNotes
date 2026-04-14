@@ -123,8 +123,11 @@ const Nav = (() => {
   }
 
   function cleanCategoryUrl(course, type, sem) {
+    const allowedCourses = ['btech', 'diploma'];
+    const allowedTypes = ['notes', 'pyq', 'syllabus'];
+    if (allowedCourses.indexOf(course) === -1 || allowedTypes.indexOf(type) === -1) return '/';
     let url = `/${course}/${type}/`;
-    if (sem) url += `${sem}/`;
+    if (sem && /^sem\d+$/.test(sem)) url += `${sem}/`;
     return url;
   }
 

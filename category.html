@@ -5,14 +5,16 @@
   <title>Redirecting...</title>
   <script>
     (function() {
+      var allowedCourses = ['btech', 'diploma'];
+      var allowedTypes = ['notes', 'pyq', 'syllabus'];
       var params = new URLSearchParams(window.location.search);
       var course = params.get('course');
       var type = params.get('type');
       var sem = params.get('sem');
       var url = '/';
-      if (course && type) {
+      if (course && type && allowedCourses.indexOf(course) !== -1 && allowedTypes.indexOf(type) !== -1) {
         url = '/' + course + '/' + type + '/';
-        if (sem) url += sem + '/';
+        if (sem && /^sem\d+$/.test(sem)) url += sem + '/';
       }
       window.location.replace(url);
     })();
