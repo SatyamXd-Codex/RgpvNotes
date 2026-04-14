@@ -122,7 +122,13 @@ const Nav = (() => {
     return q ? `${base}?${q}` : base;
   }
 
-  return { param, buildUrl };
+  function cleanCategoryUrl(course, type, sem) {
+    let url = `/${course}/${type}/`;
+    if (sem) url += `${sem}/`;
+    return url;
+  }
+
+  return { param, buildUrl, cleanCategoryUrl };
 })();
 
 // ===== ROUTE HANDLER =====
@@ -133,14 +139,16 @@ function getRoute() {
   let type = params.get("type");
   let sem = params.get("sem");
 
-  // Agar params nahi mile → path se lo
-  if (!course || !type || !sem) {
+  // If params not found, parse from clean URL path
+  if (!course || !type) {
     const path = window.location.pathname.split("/").filter(Boolean);
 
-    if (path.length >= 3) {
-      course = path[0];
-      type = path[1];
-      sem = path[2].replace("sem-", "");
+    if (path.length >= 2) {
+      course = course || path[0];
+      type = type || path[1];
+      if (path.length >= 3) {
+        sem = sem || path[2].replace(/^sem-/, '');
+      }
     }
   }
 
@@ -149,8 +157,9 @@ function getRoute() {
 
 // ===== CLEAN URL SHOW =====
 function updateCleanURL(course, type, sem) {
-  if (course && type && sem) {
-    const cleanUrl = `/${course}/${type}/sem-${sem}`;
+  if (course && type) {
+    let cleanUrl = `/${course}/${type}/`;
+    if (sem) cleanUrl += `${sem}/`;
     window.history.replaceState({}, "", cleanUrl);
   }
 }
@@ -213,7 +222,7 @@ const PDFLoader = (() => {
   function fileUrl(path, file) {
     if (typeof file === 'object' && file.url) return file.url;
     const name = typeof file === 'string' ? file : file.name;
-    return `data/${path}/${encodeURIComponent(name)}`;
+    return `/data/${path}/${encodeURIComponent(name)}`;
   }
 
   function fileName(file) {
@@ -425,12 +434,12 @@ function initIndexPage() {
   const diplomaCard = document.getElementById('card-diploma');
   if (btechCard) {
     btechCard.addEventListener('click', () => {
-      window.location.href = 'btech.html';
+      window.location.href = '/btech/';
     });
   }
   if (diplomaCard) {
     diplomaCard.addEventListener('click', () => {
-      window.location.href = 'diploma.html';
+      window.location.href = '/diploma/';
     });
   }
 }
@@ -441,7 +450,7 @@ function initCoursePage() {
   document.querySelectorAll('[data-category]').forEach(el => {
     el.addEventListener('click', () => {
       const cat = el.dataset.category;
-      window.location.href = Nav.buildUrl('category.html', { course: courseParam, type: cat });
+      window.location.href = Nav.cleanCategoryUrl(courseParam, cat);
     });
   });
 }
@@ -520,7 +529,7 @@ function buildSemesterTabs(course, type, activeSem) {
 }
 
 async function switchSemester(course, type, sem) {
-  const newUrl = Nav.buildUrl('category.html', { course, type, sem });
+  const newUrl = `/${course}/${type}/${sem}/`;
   window.history.replaceState({}, '', newUrl);
 
   document.querySelectorAll('.sem-card').forEach(c => {
@@ -570,7 +579,7 @@ function updateCategoryUI(course, type) {
 
   const backLink = document.getElementById('back-link');
   if (backLink) {
-    backLink.href = course === 'btech' ? 'btech.html' : 'diploma.html';
+    backLink.href = course === 'btech' ? '/btech/' : '/diploma/';
   }
 }
 
@@ -584,7 +593,7 @@ function initBackButton() {
       if (document.referrer && document.referrer.includes(window.location.hostname)) {
         window.history.back();
       } else {
-        window.location.href = 'index.html';
+        window.location.href = '/';
       }
     });
   });
