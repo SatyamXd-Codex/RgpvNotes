@@ -150,7 +150,9 @@ function getRoute() {
       course = course || path[0];
       type = type || path[1];
       if (path.length >= 3) {
-        sem = sem || path[2].replace(/^sem-/, '');
+        let rawSem = path[2].replace(/^sem-/, '');
+        if (!/^sem\d+$/.test(rawSem)) rawSem = 'sem' + rawSem.replace(/\D/g, '');
+        sem = sem || rawSem;
       }
     }
   }
