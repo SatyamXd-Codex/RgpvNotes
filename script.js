@@ -123,9 +123,9 @@ const Nav = (() => {
   }
 
   function cleanCategoryUrl(course, type, sem) {
-    const allowedCourses = ['btech', 'diploma'];
+    const allowedCourses = ['diploma'];
     const allowedTypes = ['notes', 'pyq', 'syllabus'];
-    if (allowedCourses.indexOf(course) === -1 || allowedTypes.indexOf(type) === -1) return '/';
+    if (allowedCourses.indexOf(course) === -1 || allowedTypes.indexOf(type) === -1) return '/diploma/';
     let url = `/${course}/${type}/`;
     if (sem && /^sem\d+$/.test(sem)) url += `${sem}/`;
     return url;
@@ -138,17 +138,20 @@ const Nav = (() => {
 function getRoute() {
   const params = new URLSearchParams(window.location.search);
 
-  let course = params.get("course");
+  let course = 'diploma';
   let type = params.get("type");
   let sem = params.get("sem");
 
   // If params not found, parse from clean URL path
-  if (!course || !type) {
+  if (!type) {
     const path = window.location.pathname.split("/").filter(Boolean);
 
-    if (path.length >= 2) {
-      course = course || path[0];
-      type = type || path[1];
+    if (path.length >= 1) {
+      if (path[0] === 'diploma') {
+        type = type || path[1];
+      } else {
+        type = type || path[0];
+      }
       if (path.length >= 3) {
         let rawSem = path[2].replace(/^sem-/, '');
         if (!/^sem\d+$/.test(rawSem)) rawSem = 'sem' + rawSem.replace(/\D/g, '');
@@ -156,6 +159,11 @@ function getRoute() {
       }
     }
   }
+
+  const allowedTypes = ['notes', 'pyq', 'syllabus'];
+  if (!allowedTypes.includes(type)) type = 'notes';
+  if (type !== 'syllabus' && (!/^sem[1-6]$/.test(sem || ''))) sem = 'sem1';
+  if (type === 'syllabus') sem = '';
 
   return { course, type, sem };
 }
@@ -435,13 +443,7 @@ function showToast(message) {
 
 /** index.html **/
 function initIndexPage() {
-  const btechCard = document.getElementById('card-btech');
   const diplomaCard = document.getElementById('card-diploma');
-  if (btechCard) {
-    btechCard.addEventListener('click', () => {
-      window.location.href = '/btech/';
-    });
-  }
   if (diplomaCard) {
     diplomaCard.addEventListener('click', () => {
       window.location.href = '/diploma/';
@@ -449,21 +451,15 @@ function initIndexPage() {
   }
 }
 
-/** btech.html / diploma.html — category selection **/
+/** diploma.html — category selection **/
 function initCoursePage() {
-  const courseParam = Nav.param('course') || detectCourseFromPage();
+  const courseParam = 'diploma';
   document.querySelectorAll('[data-category]').forEach(el => {
     el.addEventListener('click', () => {
       const cat = el.dataset.category;
       window.location.href = Nav.cleanCategoryUrl(courseParam, cat);
     });
   });
-}
-
-function detectCourseFromPage() {
-  const path = window.location.pathname;
-  if (path.includes('diploma')) return 'diploma';
-  return 'btech';
 }
 
 /** category.html — PDF listing **/
@@ -512,7 +508,7 @@ function buildSemesterTabs(course, type, activeSem) {
   const semGrid = document.getElementById('sem-grid');
   if (!semGrid) return;
 
-  const count = course === 'btech' ? 8 : 6;
+  const count = 6;
   semGrid.innerHTML = '';
 
   for (let i = 1; i <= count; i++) {
@@ -557,7 +553,7 @@ async function switchSemester(course, type, sem) {
 
 function updateCategoryUI(course, type) {
   const typeNames = { notes: 'Notes', pyq: 'Previous Year Papers', syllabus: 'Syllabus' };
-  const courseNames = { btech: 'B.Tech', diploma: 'Diploma' };
+  const courseNames = { diploma: 'Diploma' };
   const typeIcons  = { notes: 'fa-book-open', pyq: 'fa-file-alt', syllabus: 'fa-list-alt' };
 
   const titleEl   = document.getElementById('page-title');
@@ -579,12 +575,12 @@ function updateCategoryUI(course, type) {
   }
   if (badgeEl) {
     badgeEl.textContent = courseName;
-    badgeEl.className = `badge ${course === 'btech' ? 'badge-blue' : 'badge-orange'}`;
+    badgeEl.className = 'badge badge-orange';
   }
 
   const backLink = document.getElementById('back-link');
   if (backLink) {
-    backLink.href = course === 'btech' ? '/btech/' : '/diploma/';
+    backLink.href = '/diploma/';
   }
 }
 
